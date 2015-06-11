@@ -22,3 +22,8 @@
 
 (my-package-install 'scala-mode2)
 (my-package-install 'sbt-mode)
+
+(add-to-list 'custom-theme-load-path
+	     "~/.emacs.d/emacs-color-theme-solarized/")
+(load-theme 'solarized t)
+
