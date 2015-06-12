@@ -1,5 +1,6 @@
 (setq inhibit-startup-screen t)
 
+;; Package Installation
 (require 'package)
 (package-initialize)
 
@@ -20,10 +21,19 @@
     (package-refresh-contents)
     (package-install target-package)))
 
+;; Install Packages
 (my-package-install 'scala-mode2)
 (my-package-install 'sbt-mode)
+(my-package-install 'auto-complete)
 
+;; Solarized
 (add-to-list 'custom-theme-load-path
 	     "~/.emacs.d/emacs-color-theme-solarized/")
 (load-theme 'solarized t)
+
+;; Auto-Complete
+(require 'auto-complete-config)
+(ac-config-default)
+
+
 
