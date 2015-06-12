@@ -25,15 +25,17 @@
 (my-package-install 'scala-mode2)
 (my-package-install 'sbt-mode)
 (my-package-install 'auto-complete)
+(my-package-install 'fuzzy)
 
 ;; Solarized
 (add-to-list 'custom-theme-load-path
 	     "~/.emacs.d/emacs-color-theme-solarized/")
 (load-theme 'solarized t)
 
-;; Auto-Complete
+;; Auto-Complete: Add new auto-complete words to a file ~/.dict, one
+;; word per line.  After adding new words it is best to run `M-x
+;; ac-clear-dictionary-cache` to reload dictionaries.
 (require 'auto-complete-config)
 (ac-config-default)
 
-
-
+(global-set-key (kbd "C-c \t") 'ac-fuzzy-complete)
