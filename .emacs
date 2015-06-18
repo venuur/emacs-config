@@ -39,3 +39,12 @@
 (ac-config-default)
 
 (global-set-key (kbd "C-c \t") 'ac-fuzzy-complete)
+
+;; Require R for
+(load-file "/usr/share/emacs/site-lisp/ess-site.el")
+
+;; Adjust indent to match Google R coding standard.
+(defun my-ess-hook ()
+  (setq ess-indent-level 2))
+(add-hook 'ess-mode-hook
+	  'my-ess-hook)
