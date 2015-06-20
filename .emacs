@@ -31,6 +31,8 @@
 (add-to-list 'custom-theme-load-path
 	     "~/.emacs.d/emacs-color-theme-solarized/")
 (load-theme 'solarized t)
+(setq frame-background-mode 'dark)
+(enable-theme 'solarized)
 
 ;; Auto-Complete: Add new auto-complete words to a file ~/.dict, one
 ;; word per line.  After adding new words it is best to run `M-x
