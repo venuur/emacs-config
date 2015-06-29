@@ -26,6 +26,8 @@
 (my-package-install 'sbt-mode)
 (my-package-install 'auto-complete)
 (my-package-install 'fuzzy)
+(my-package-install 'autopair)
+(my-package-install 'ess)
 
 ;; Solarized
 (add-to-list 'custom-theme-load-path
@@ -43,10 +45,38 @@
 (global-set-key (kbd "C-c \t") 'ac-fuzzy-complete)
 
 ;; Require R for
-(load-file "/usr/share/emacs/site-lisp/ess-site.el")
+(require 'ess-site)
 
 ;; Adjust indent to match Google R coding standard.
 (defun my-ess-hook ()
-  (setq ess-indent-level 2))
+  (setq ess-indent-level 2)
+  (setq autopair-mode t))
 (add-hook 'ess-mode-hook
 	  'my-ess-hook)
+
+;; AUCTeX
+(setq-default TeX-master nil)
+(setq TeX-parse-self t)		   	;Enable parse on load.
+(setq TeX-auto-save t)			;Enable parse on save.
+
+(defun my-auctex-hook ()
+  "My customizations for AUCTeX."
+  (LaTeX-add-environments
+   '("IEEEeqnarray" LaTeX-env-label)
+   '("equation" LaTeX-env-label)
+   '("multline" LaTeX-env-label)
+   '("dcases" LaTeX-env-label))
+  (setq visual-line-mode t)
+  (setq flyspell-mode t)
+  (setq LaTeX-math-mode t)
+  (setq autopair-mode t))
+
+(add-hook 'LaTeX-mode-hook 'my-auctex-hook)
+
+;; (setq font-latex-math-environments
+;; 	(quote ("IEEEeqnarray"
+;; 		"equation",
+;; 		"multline")))
+
+(require 'autopair)
+
