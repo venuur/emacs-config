@@ -22,7 +22,7 @@
     (package-install target-package)))
 
 ;; Install Packages
-(my-package-install 'scala-mode2)
+;; (my-package-install 'scala-mode2)
 (my-package-install 'sbt-mode)
 (my-package-install 'auto-complete)
 (my-package-install 'fuzzy)
