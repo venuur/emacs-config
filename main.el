@@ -14,3 +14,4 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (add-to-list 'python-shell-completion-native-disabled-interpreters "python.exe")))
+(load "abbrev.el")
