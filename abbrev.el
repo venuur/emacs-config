@@ -84,7 +84,6 @@
     ("Uleftarrow" "←")
     ("Uuparrow" "↑")
     ("Udownarrow" "↓")
-    ("Uleftright")
     ))
 
 (set-default 'abbrev-mode t)
