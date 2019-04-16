@@ -8,10 +8,22 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (setq python-shell-interpreter
-      "~/AppData/Local/Continuum/anaconda2/python.exe")
+      ;; Handle tilde expansion.
+      (expand-file-name "~/AppData/Local/Continuum/anaconda2/python.exe"))
 (setq org-babel-python-command python-shell-interpreter)
 (setq python-shell-unbuffered nil)
 (add-hook 'python-mode-hook
           (lambda ()
             (add-to-list 'python-shell-completion-native-disabled-interpreters "python.exe")))
+
+;; Add support for elegantnote LaTeX class.
+(add-to-list 'org-latex-classes
+             '("elegantnote"
+               "\\documentclass[en]{elegantnote}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 (load "abbrev.el")
