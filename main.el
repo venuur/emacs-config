@@ -36,5 +36,9 @@
           (lambda ()
             (add-to-list 'python-shell-completion-native-disabled-interpreters "python.exe")))
 
+;;; Markdown Mode
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (custom-set-faces '(markdown-code-face ((t (:family "source code pro")))))))
 
 (load "abbrev.el")
