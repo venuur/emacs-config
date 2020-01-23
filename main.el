@@ -1,16 +1,41 @@
+;;; Global configurations.
+(let ((faces '((font-lock-comment-face :foreground "#4d7a70" :slant italic)
+               (font-lock-constant-face :foreground "#6b7875")
+               (font-lock-string-face :foreground "#7a633d")
+               (font-lock-type-face :foreground "grey50")
+               (font-lock-warning-face :foreground "#cd5c5c")
+               (font-lock-preprocessor-face :foreground "#596766" :weight bold)
+               (font-lock-doc-face :foreground "#707f75" :slant italic)
+               (font-lock-keyword-face :foreground "#665d9c" :weight bold)
+               (font-lock-builtin-face :foreground "gray50" :weight bold)
+               (font-lock-function-name-face :foreground "#2e5fa2" :weight bold)
+               (font-lock-variable-name-face :foreground "#6f5057" :weight bold)
+               (mode-line  :background "#bedefe" :box (:line-width 2 :color "gray85")))))
+  (dolist (face faces)
+    (apply 'set-face-attribute (car face) nil (cdr face)))
+  (add-to-list 'default-frame-alist '(font . "Triplicate T4c"))
+  (set-face-attribute 'default t :font "Triplicate T4c"))
 
-;;; Org Mode
-(require 'org-tempo)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (python . t)))
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-(setq python-shell-interpreter
-      ;; Handle tilde expansion.
-      (expand-file-name "~/AppData/Local/Continuum/anaconda2/python.exe"))
+;; Julia
+(add-to-list 'load-path
+	     "C:/Users/carlmorris/personal/julia-emacs")
+(require 'julia-mode)
 
+
+;; recent files list
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(setq recentf-max-saved-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+(require 'fill-column-indicator)
+(define-globalized-minor-mode global-fci-mode fci-mode
+  (lambda () (fci-mode 1)))
+(setq fci-rule-column 92)
+(add-hook 'after-change-major-mode-hook 'fci-mode)
+(global-company-mode)
+
+;;; Org Mode 
 (setq python-shell-unbuffered nil)
 (defun cm-org-hook ()
   ;; Add support for elegantnote LaTeX class.
@@ -36,9 +61,19 @@
           (lambda ()
             (add-to-list 'python-shell-completion-native-disabled-interpreters "python.exe")))
 
+;;; Company Mode
+(require 'company-tabnine)
+(add-to-list 'company-backends #'company-tabnine)
+(setq company-idle-delay 0.1)
+(setq company-show-numbers t)
+
 ;;; Markdown Mode
 (add-hook 'markdown-mode-hook
           (lambda ()
-            (custom-set-faces '(markdown-code-face ((t (:family "source code pro")))))))
+            (custom-set-faces '(markdown-code-face ((t (:family "Triplicate T4c")))))))
+
+;;; Magit
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 (load "abbrev.el")
